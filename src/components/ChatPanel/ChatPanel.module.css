@@ -1,0 +1,39 @@
+.chatPanel__wrapper {
+  width: 20%;
+  height: 100vh;
+  padding: 20px 20px 30px 20px;
+  border-right: 1px solid black;
+}
+
+.title__wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.title {
+  font-size: 30px;
+}
+
+.search__input {
+  margin-bottom: 30px;
+}
+
+.search__input input {
+  font-size: 12px;
+  width: 100%;
+  height: 50px;
+  border-radius: 15px;
+  padding-left: 20px;
+}
+
+.create__btn {
+  font-size: 30px;
+  color: #fff;
+  background-color: orangered;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}

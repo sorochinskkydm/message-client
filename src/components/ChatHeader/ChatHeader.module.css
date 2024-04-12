@@ -1,0 +1,50 @@
+.chatHeader__wrapper {
+  display: flex;
+  color: #000;
+  font-size: 12px;
+  justify-content: flex-start;
+  align-items: center;
+  width: 80%;
+  height: 100px;
+  padding: 10px 15px 10px 15px;
+  background-color: #fff;
+  margin-bottom: 10px;
+  box-shadow: 10px 10px 30px 0px gray;
+}
+
+.active {
+  color: #fff;
+  background-color: #30323e;
+}
+
+.image__wrapper {
+  margin-right: 30px;
+}
+
+.chatHeader__img {
+  width: 60px;
+  height: 60px;
+}
+
+.chatHeader__phone__img {
+  width: 40px;
+  height: 40px;
+}
+
+.chatHeader__more__img {
+  width: 40px;
+  height: 40px;
+}
+
+.icons__wrapper {
+  display: flex;
+  margin-left: 65%;
+}
+
+.phone__wrapper {
+  margin-right: 30px;
+}
+
+.username {
+  font-size: 25px;
+}
