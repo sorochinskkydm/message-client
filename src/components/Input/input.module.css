@@ -1,0 +1,18 @@
+.auth__label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: gray;
+}
+
+.auth__input {
+  width: 300px;
+  padding: 7px;
+  border-radius: 10px;
+  border: 1px solid gray;
+}
+
+.auth__input__wrapper {
+  display: block;
+  margin-bottom: 20px;
+}

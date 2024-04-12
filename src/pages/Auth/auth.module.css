@@ -1,0 +1,42 @@
+.container {
+  display: block;
+  margin: 0 auto;
+  max-width: 80%;
+}
+
+.title {
+  font-size: 50px;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.title span {
+  color: #fc6d26;
+}
+
+.auth__wrapper {
+  display: block;
+  position: relative;
+  margin-top: 50%;
+}
+
+.auth__form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 600px;
+  /* padding: 0 30px 30px 0; */
+  margin: 0 auto;
+  /* margin-top: 500px; */
+}
+
+.auth__button {
+  display: block;
+  width: 300px;
+  margin-top: 20px;
+  padding: 10px;
+  font-size: 15px;
+  color: #fff;
+  background-color: #fc6d26;
+  border-radius: 12px;
+}
