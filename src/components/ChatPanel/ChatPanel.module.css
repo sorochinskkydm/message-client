@@ -1,7 +1,9 @@
 .chatPanel__wrapper {
-  width: 20%;
+  display: flex;
+  justify-content: space-between;
+  width: 23%;
   height: 100vh;
-  padding: 20px 20px 30px 20px;
+  padding: 0px 20px 30px 20px;
   border-right: 1px solid black;
 }
 
@@ -18,6 +20,41 @@
 
 .search__input {
   margin-bottom: 30px;
+}
+
+.project__panel__wrapper {
+  padding-top: 20px;
+  padding-right: 5px;
+  height: 100vh;
+  border-right: 1px solid black;
+}
+
+.add__project__btn {
+  width: 80px;
+  height: 80px;
+  border: 1px solid black;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  margin-right: 10px;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.add__project__button__name {
+  font-size: 12px;
+}
+
+.add__project__btn__img {
+  width: 46px;
+  height: 46px;
+}
+
+.chats__wrapper {
+  padding-top: 20px;
 }
 
 .search__input input {
