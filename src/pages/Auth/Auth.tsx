@@ -2,6 +2,10 @@ import * as React from "react";
 import styles from "./auth.module.css";
 import Input from "../../components/Input/Input";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
+import { setCaughtError, setErrorMessage } from "../../redux/slices/errorSlice";
+import Errors from "../../components/Errors/Errors";
 
 interface IAuth {
   username: string;
@@ -9,11 +13,15 @@ interface IAuth {
 }
 
 const Auth: React.FC = () => {
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const caughtError = useAppSelector((state) => state.errorReducer.caughtError);
+
   const [auth, setAuth] = React.useState<IAuth>({
     username: "",
     password: "",
   });
+  // const [token, setToken] = React.useState();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -25,24 +33,44 @@ const Auth: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    fetch("http://localhost:8080/api/auth/login", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(auth),
-    })
+    axios
+      .post("http://localhost:8080/api/auth/login", {
+        username: auth.username,
+        password: auth.password,
+      })
       .then((response) => {
-        if (response.status === 400) {
-          alert("Проверьте правильность ввода данных");
-          return;
-        }
+        console.log(response.data);
         navigate("/main");
       })
-      .catch((error) => {
-        console.log(error);
+      .catch((error): void => {
+        dispatch(setErrorMessage(error.response.data.message));
+        dispatch(setCaughtError(true));
+        setTimeout(() => {
+          dispatch(setCaughtError(false));
+        }, 3000);
       });
+    // fetch("http://localhost:8080/api/auth/login", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-type": "application/json",
+    //   },
+    //   body: JSON.stringify(auth),
+    // })
+    //   .then((response) => {
+    //     if (response.status === 400) {
+    //       alert("Проверьте правильность ввода данных");
+    //       return;
+    //     }
+    //     navigate("/main");
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
   };
+
+  // if (caughtError) {
+  //   return <Errors />;
+  // }
   return (
     <div className={styles.container}>
       <form onSubmit={handleSubmit} method="post" className={styles.auth__form}>
@@ -74,6 +102,7 @@ const Auth: React.FC = () => {
               Войти
             </button>
           </div>
+          {caughtError && <Errors />}
         </div>
       </form>
     </div>

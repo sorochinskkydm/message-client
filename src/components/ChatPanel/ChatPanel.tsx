@@ -4,6 +4,8 @@ import styles from "./ChatPanel.module.css";
 import Project from "../Project/Project";
 
 import addImage from "../../images/add.png";
+import userImage from "../../images/user.png";
+import Tab from "../Tab/Tab";
 
 const ChatPanel = (props: any) => {
   return (
@@ -23,6 +25,13 @@ const ChatPanel = (props: any) => {
         </div>
       </div>
       <div className={styles.chats__wrapper}>
+        <div className={styles.tabs__wrapper}>
+          <Tab
+            image={userImage}
+            alt="user profile image"
+            description="profile"
+          />
+        </div>
         <div className={styles.title__wrapper}>
           <div className={styles.title}>Чаты</div>
           <div className={styles.create}>
