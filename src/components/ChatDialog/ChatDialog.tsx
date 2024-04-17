@@ -31,7 +31,7 @@ const ChatDialog: React.FC = (
       <div className={styles.text__wrapper}>
         <div className={styles.username}>Сорочинский Дмитрий</div>
         <div className={styles.chatDialog__lastMessage}>
-          Что, если не получится сд...
+          Что, если не получится сд
         </div>
       </div>
       <div className={styles.chatDialog__sendTime}>20:15</div>
