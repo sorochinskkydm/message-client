@@ -6,6 +6,7 @@ import axios from "axios";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { setCaughtError, setErrorMessage } from "../../redux/slices/errorSlice";
 import Errors from "../../components/Errors/Errors";
+import { instance } from "../../utils/api.config";
 
 interface IAuth {
   username: string;
@@ -33,13 +34,14 @@ const Auth: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    axios
+    instance
       .post("http://localhost:8080/api/auth/login", {
         username: auth.username,
         password: auth.password,
       })
       .then((response) => {
-        console.log(response.data);
+        const token = response.data.accessToken;
+        localStorage.setItem("token", token);
         navigate("/main");
       })
       .catch((error): void => {
@@ -49,28 +51,7 @@ const Auth: React.FC = () => {
           dispatch(setCaughtError(false));
         }, 3000);
       });
-    // fetch("http://localhost:8080/api/auth/login", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-type": "application/json",
-    //   },
-    //   body: JSON.stringify(auth),
-    // })
-    //   .then((response) => {
-    //     if (response.status === 400) {
-    //       alert("Проверьте правильность ввода данных");
-    //       return;
-    //     }
-    //     navigate("/main");
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
   };
-
-  // if (caughtError) {
-  //   return <Errors />;
-  // }
   return (
     <div className={styles.container}>
       <form onSubmit={handleSubmit} method="post" className={styles.auth__form}>
