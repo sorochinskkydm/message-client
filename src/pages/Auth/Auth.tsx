@@ -2,11 +2,11 @@ import * as React from "react";
 import styles from "./auth.module.css";
 import Input from "../../components/Input/Input";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { setCaughtError, setErrorMessage } from "../../redux/slices/errorSlice";
 import Errors from "../../components/Errors/Errors";
 import { instance } from "../../utils/api.config";
+import { Link } from "react-router-dom";
 
 interface IAuth {
   username: string;
@@ -82,6 +82,11 @@ const Auth: React.FC = () => {
             <button type="submit" className={styles.auth__button}>
               Войти
             </button>
+            <div className={styles.link__wrapper}>
+              <Link className={styles.linkToRegister} to="/register">
+                Have no account? <br></br> Register
+              </Link>
+            </div>
           </div>
           {caughtError && <Errors />}
         </div>

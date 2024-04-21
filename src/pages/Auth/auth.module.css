@@ -20,6 +20,20 @@
   margin-top: 50%;
 }
 
+.link__wrapper {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.linkToRegister {
+  margin: 0 auto;
+  text-decoration: none;
+  color: black;
+  text-align: center;
+}
+
 .auth__form {
   display: flex;
   align-items: center;

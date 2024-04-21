@@ -6,8 +6,10 @@ import Project from "../Project/Project";
 import addImage from "../../images/add.png";
 import userImage from "../../images/user.png";
 import Tab from "../Tab/Tab";
+import Profile from "../../pages/Profile/Profile";
 
 const ChatPanel = (props: any) => {
+  const [isOpen, setIsOpen] = React.useState(false);
   return (
     <div className={styles.chatPanel__wrapper}>
       <div className={styles.project__panel__wrapper}>
@@ -25,7 +27,7 @@ const ChatPanel = (props: any) => {
         </div>
       </div>
       <div className={styles.chats__wrapper}>
-        <div className={styles.tabs__wrapper}>
+        <div className={styles.tabs__wrapper} onClick={() => setIsOpen(true)}>
           <Tab
             image={userImage}
             alt="user profile image"
@@ -53,6 +55,7 @@ const ChatPanel = (props: any) => {
         <ChatDialog />
         <ChatDialog />
       </div>
+      {isOpen && <Profile setIsOpen={setIsOpen} />}
     </div>
   );
 };
