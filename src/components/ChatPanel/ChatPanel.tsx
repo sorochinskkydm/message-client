@@ -7,9 +7,12 @@ import addImage from "../../images/add.png";
 import userImage from "../../images/user.png";
 import Tab from "../Tab/Tab";
 import Profile from "../../pages/Profile/Profile";
+import ChatModal from "../ChatModal/ChatModal";
 
 const ChatPanel = (props: any) => {
   const [isOpen, setIsOpen] = React.useState(false);
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
+
   return (
     <div className={styles.chatPanel__wrapper}>
       <div className={styles.project__panel__wrapper}>
@@ -37,7 +40,11 @@ const ChatPanel = (props: any) => {
         <div className={styles.title__wrapper}>
           <div className={styles.title}>Чаты</div>
           <div className={styles.create}>
-            <button className={styles.create__btn} type="button">
+            <button
+              className={styles.create__btn}
+              type="button"
+              onClick={() => setIsModalOpen(!isModalOpen)}
+            >
               +
             </button>
           </div>
@@ -56,6 +63,7 @@ const ChatPanel = (props: any) => {
         <ChatDialog />
       </div>
       {isOpen && <Profile setIsOpen={setIsOpen} />}
+      {isModalOpen && <ChatModal />}
     </div>
   );
 };

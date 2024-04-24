@@ -1,0 +1,38 @@
+.chatModal__wrapper {
+  top: 130px;
+  left: 450px;
+  position: absolute;
+  width: 300px;
+  max-height: 100px;
+  border: 1px solid black;
+  border-radius: 20px;
+}
+
+.background {
+  width: 100vw;
+  height: 100vh;
+}
+
+.chatModal__item {
+  text-align: left;
+  font-size: 15px;
+  border-bottom: 1px solid black;
+  padding: 5px 0 5px 15px;
+  cursor: pointer;
+}
+
+.chatModal__item:last-child {
+  border-bottom: none;
+}
+
+.chatModal__item:hover:first-child {
+  background-color: orangered;
+  color: #fff;
+  border-radius: 20px 20px 0 0;
+}
+
+.chatModal__item:hover:last-child {
+  background-color: orangered;
+  color: #fff;
+  border-radius: 0 0 20px 20px;
+}

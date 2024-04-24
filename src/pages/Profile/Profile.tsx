@@ -18,7 +18,7 @@ interface IProfile {
   photo: string;
 }
 
-interface IModal {
+export interface IModal {
   setIsOpen: any;
 }
 
