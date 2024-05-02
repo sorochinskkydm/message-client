@@ -1,6 +1,6 @@
 .chatModal__wrapper {
   top: 130px;
-  left: 450px;
+  left: 600px;
   position: absolute;
   width: 300px;
   max-height: 100px;
@@ -35,4 +35,22 @@
   background-color: orangered;
   color: #fff;
   border-radius: 0 0 20px 20px;
+}
+
+@media (max-width: 2560px) {
+  .chatModal__wrapper {
+    left: 800px;
+  }
+}
+
+@media (max-width: 1920px) {
+  .chatModal__wrapper {
+    left: 600px;
+  }
+}
+
+@media (max-width: 1440px) {
+  .chatModal__wrapper {
+    left: 500px;
+  }
 }

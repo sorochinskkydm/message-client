@@ -3,22 +3,26 @@ import styles from "./ChatDialog.module.css";
 import userImage from "../../images/user.png";
 
 interface IChatDialog {
-  name: string;
-  surname: string;
+  // name: string;
+  // surname: string;
   lastMessage: string;
-  imagePath: string;
-  sendTime: Date;
+  // imagePath: string;
+  // sendTime: Date;
 }
 
-const ChatDialog: React.FC = (
-  {
-    // name,
-    // surname,
-    // lastMessage,
-    // imagePath,
-    // sendTime,
-  }
-) => {
+const ChatDialog: React.FC<IChatDialog> = ({
+  // name,
+  // surname,
+  lastMessage,
+  // imagePath,
+  // sendTime,
+}) => {
+  const [slicedLastMessage, setSlicedLastMessage] = React.useState("");
+  React.useEffect(() => {
+    if (lastMessage.length > 15) {
+      setSlicedLastMessage(`${lastMessage.slice(0, 15)}...`);
+    }
+  }, [slicedLastMessage, lastMessage]);
   return (
     <div className={styles.chatDialog__wrapper}>
       <div className={styles.image__wrapper}>
@@ -31,7 +35,7 @@ const ChatDialog: React.FC = (
       <div className={styles.text__wrapper}>
         <div className={styles.username}>Сорочинский Дмитрий</div>
         <div className={styles.chatDialog__lastMessage}>
-          Что, если не получится сд
+          {slicedLastMessage}
         </div>
       </div>
       <div className={styles.chatDialog__sendTime}>20:15</div>

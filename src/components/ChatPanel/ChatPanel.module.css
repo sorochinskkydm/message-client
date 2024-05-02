@@ -1,7 +1,6 @@
 .chatPanel__wrapper {
   display: flex;
   justify-content: space-between;
-  width: 23%;
   height: 100vh;
   padding: 0px 20px 30px 20px;
   border-right: 1px solid black;

@@ -1,3 +1,18 @@
 .main__wrapper {
   display: flex;
+  /* flex-direction: row; */
+  justify-content: space-between;
+}
+
+.main__chats__wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.main__chatpanel__wrapper {
+  width: 30%;
+}
+
+.main__chats__wrapper {
+  width: 70%;
 }

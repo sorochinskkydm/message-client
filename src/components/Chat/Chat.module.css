@@ -1,0 +1,16 @@
+.chat__wrapper {
+  position: relative;
+}
+
+.chat__empty {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 200px;
+  color: gray;
+}
+
+.chat__empty__image {
+  display: block;
+  margin: 0 auto;
+}

@@ -57,10 +57,10 @@ const ChatPanel = (props: any) => {
             placeholder="Поиск диалогов"
           />
         </div>
-        <ChatDialog />
-        <ChatDialog />
-        <ChatDialog />
-        <ChatDialog />
+        <ChatDialog lastMessage="awddwaawdwdwawwadwadaw" />
+        <ChatDialog lastMessage="awddwaawdwdwawwadwadaw" />
+        <ChatDialog lastMessage="awddwaawdwdwawwadwadaw" />
+        <ChatDialog lastMessage="awddwaawdwdwawwadwadaw" />
       </div>
       {isOpen && <Profile setIsOpen={setIsOpen} />}
       {isModalOpen && <ChatModal />}

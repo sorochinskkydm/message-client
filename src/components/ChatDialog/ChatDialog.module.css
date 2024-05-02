@@ -33,5 +33,17 @@
 }
 
 .chatDialog__lastMessage {
+  color: gray;
   margin-top: 10px;
+}
+
+@media (max-width: 1440px) {
+  .chatDialog__lastMessage {
+    margin-top: 3px;
+    font-size: 12px;
+  }
+
+  .username {
+    font-size: 12px;
+  }
 }
