@@ -3,11 +3,9 @@
 }
 
 .chat__empty {
-  display: block;
-  margin: 0 auto;
-  text-align: center;
-  margin-top: 200px;
-  color: gray;
+  min-height: 100%;
+  min-width: 100%;
+  background-color: green;
 }
 
 .chat__empty__image {

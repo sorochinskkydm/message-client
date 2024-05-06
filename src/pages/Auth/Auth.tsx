@@ -4,6 +4,8 @@ import Input from "../../components/Input/Input";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { setCaughtError, setErrorMessage } from "../../redux/slices/errorSlice";
+import { getUserData } from "../../redux/slices/userSlice";
+
 import Errors from "../../components/Errors/Errors";
 import { instance } from "../../utils/api.config";
 import { Link } from "react-router-dom";
@@ -22,7 +24,6 @@ const Auth: React.FC = () => {
     username: "",
     password: "",
   });
-  // const [token, setToken] = React.useState();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -32,25 +33,31 @@ const Auth: React.FC = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    instance
-      .post("http://localhost:8080/api/auth/login", {
-        username: auth.username,
-        password: auth.password,
-      })
-      .then((response) => {
-        const token = response.data.accessToken;
-        localStorage.setItem("token", token);
-        navigate("/main");
-      })
-      .catch((error): void => {
-        dispatch(setErrorMessage(error.response.data.message));
-        dispatch(setCaughtError(true));
-        setTimeout(() => {
-          dispatch(setCaughtError(false));
-        }, 3000);
-      });
+
+    await Promise.all([
+      instance
+        .post("http://localhost:8080/api/auth/login", {
+          username: auth.username,
+          password: auth.password,
+        })
+        .then((response) => {
+          const { accessToken, userId } = response.data;
+          localStorage.setItem("token", accessToken);
+          localStorage.setItem("userId", userId);
+          navigate("/main");
+        })
+        .catch((error): void => {
+          dispatch(setErrorMessage(error.response.data.message));
+          dispatch(setCaughtError(true));
+          setTimeout(() => {
+            dispatch(setCaughtError(false));
+          }, 3000);
+        }),
+    ]);
+
+    dispatch(getUserData());
   };
   return (
     <div className={styles.container}>

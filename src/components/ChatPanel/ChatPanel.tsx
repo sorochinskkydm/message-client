@@ -8,10 +8,47 @@ import userImage from "../../images/user.png";
 import Tab from "../Tab/Tab";
 import Profile from "../../pages/Profile/Profile";
 import ChatModal from "../ChatModal/ChatModal";
+import { instance } from "../../utils/api.config";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
+import { setCaughtError, setErrorMessage } from "../../redux/slices/errorSlice";
+
+interface IChats {
+  firstUserId: string;
+  secondUserId: string;
+  projectId: string;
+}
 
 const ChatPanel = (props: any) => {
   const [isOpen, setIsOpen] = React.useState(false);
   const [isModalOpen, setIsModalOpen] = React.useState(false);
+  const dispatch = useAppDispatch();
+  const caughtError = useAppSelector((state) => state.errorReducer.caughtError);
+  const [chats, setChats] = React.useState<IChats>({
+    firstUserId: "",
+    secondUserId: "",
+    projectId: "",
+  });
+
+  React.useEffect(() => {
+    const userId = localStorage.getItem("userId");
+    instance
+      .get(`http://localhost:8080/api/chats/${userId}`)
+      .then((response) => {
+        console.log(response.data);
+        setChats({
+          firstUserId: response.data.firstUserId,
+          secondUserId: response.data.secondUserId,
+          projectId: response.data.projectId,
+        });
+      })
+      .catch((error): void => {
+        dispatch(setErrorMessage(error.response.data.message));
+        dispatch(setCaughtError(true));
+        setTimeout(() => {
+          dispatch(setCaughtError(false));
+        }, 3000);
+      });
+  }, [dispatch]);
 
   return (
     <div className={styles.chatPanel__wrapper}>
