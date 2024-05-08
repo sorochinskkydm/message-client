@@ -11,35 +11,33 @@ import ChatModal from "../ChatModal/ChatModal";
 import { instance } from "../../utils/api.config";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { setCaughtError, setErrorMessage } from "../../redux/slices/errorSlice";
+import { IProject, IUser } from "../../interfaces/interface";
+import userSlice from "../../redux/slices/userSlice";
 
-interface IChats {
+interface IChat {
+  firstUser: IUser;
   firstUserId: string;
   secondUserId: string;
+  secondUser: IUser;
   projectId: string;
+  project: IProject;
 }
 
+interface IChats extends Array<IChat> {}
+
 const ChatPanel = (props: any) => {
+  const dispatch = useAppDispatch();
+  const userInfo = useAppSelector((state) => state.userReducer.userInfo);
   const [isOpen, setIsOpen] = React.useState(false);
   const [isModalOpen, setIsModalOpen] = React.useState(false);
-  const dispatch = useAppDispatch();
-  const caughtError = useAppSelector((state) => state.errorReducer.caughtError);
-  const [chats, setChats] = React.useState<IChats>({
-    firstUserId: "",
-    secondUserId: "",
-    projectId: "",
-  });
+  const [chats, setChats] = React.useState<IChats>([]);
 
   React.useEffect(() => {
     const userId = localStorage.getItem("userId");
     instance
       .get(`http://localhost:8080/api/chats/${userId}`)
       .then((response) => {
-        console.log(response.data);
-        setChats({
-          firstUserId: response.data.firstUserId,
-          secondUserId: response.data.secondUserId,
-          projectId: response.data.projectId,
-        });
+        setChats(response.data);
       })
       .catch((error): void => {
         dispatch(setErrorMessage(error.response.data.message));
@@ -50,6 +48,7 @@ const ChatPanel = (props: any) => {
       });
   }, [dispatch]);
 
+  console.log(chats, "chats");
   return (
     <div className={styles.chatPanel__wrapper}>
       <div className={styles.project__panel__wrapper}>
@@ -94,10 +93,31 @@ const ChatPanel = (props: any) => {
             placeholder="Поиск диалогов"
           />
         </div>
-        <ChatDialog lastMessage="awddwaawdwdwawwadwadaw" />
-        <ChatDialog lastMessage="awddwaawdwdwawwadwadaw" />
-        <ChatDialog lastMessage="awddwaawdwdwawwadwadaw" />
-        <ChatDialog lastMessage="awddwaawdwdwawwadwadaw" />
+        {chats.map((chat: IChat, i) => {
+          if (userInfo.id === chat.firstUserId) {
+            return (
+              <ChatDialog
+                key={i}
+                lastMessage="a"
+                name={chat.firstUser.name}
+                surname={chat.firstUser.surname}
+                imagePath="c"
+                sendTime={new Date()}
+              />
+            );
+          } else {
+            return (
+              <ChatDialog
+                key={i}
+                lastMessage="a"
+                name={chat.secondUser.name}
+                surname={chat.secondUser.surname}
+                imagePath="c"
+                sendTime={new Date()}
+              />
+            );
+          }
+        })}
       </div>
       {isOpen && <Profile setIsOpen={setIsOpen} />}
       {isModalOpen && <ChatModal />}
