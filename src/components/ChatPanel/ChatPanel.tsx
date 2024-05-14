@@ -12,9 +12,9 @@ import { instance } from "../../utils/api.config";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { setCaughtError, setErrorMessage } from "../../redux/slices/errorSlice";
 import { IProject, IUser } from "../../interfaces/interface";
-import userSlice from "../../redux/slices/userSlice";
 
 interface IChat {
+  id: string;
   firstUser: IUser;
   firstUserId: string;
   secondUserId: string;
@@ -48,7 +48,6 @@ const ChatPanel = (props: any) => {
       });
   }, [dispatch]);
 
-  console.log(chats, "chats");
   return (
     <div className={styles.chatPanel__wrapper}>
       <div className={styles.project__panel__wrapper}>
@@ -98,7 +97,7 @@ const ChatPanel = (props: any) => {
             return (
               <ChatDialog
                 key={i}
-                lastMessage="a"
+                chatId={chat.id}
                 name={chat.firstUser.name}
                 surname={chat.firstUser.surname}
                 imagePath="c"
@@ -109,7 +108,7 @@ const ChatPanel = (props: any) => {
             return (
               <ChatDialog
                 key={i}
-                lastMessage="a"
+                chatId={chat.id}
                 name={chat.secondUser.name}
                 surname={chat.secondUser.surname}
                 imagePath="c"
