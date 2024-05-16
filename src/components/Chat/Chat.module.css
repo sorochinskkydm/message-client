@@ -1,14 +1,11 @@
-.chat__wrapper {
-  position: relative;
+.chat__wrapper__first {
+  /* position: relative; */
+  display: flex;
+  justify-content: flex-end;
 }
 
-.chat__empty {
+/* .chat__empty {
   min-height: 100%;
   min-width: 100%;
   background-color: green;
-}
-
-.chat__empty__image {
-  display: block;
-  margin: 0 auto;
-}
+} */

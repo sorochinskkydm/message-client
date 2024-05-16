@@ -3,6 +3,7 @@ import styles from "./ChatDialog.module.css";
 import userImage from "../../images/user.png";
 import { instance } from "../../utils/api.config";
 import { getHours, getMinutes } from "date-fns";
+import { useAppSelector } from "../../hooks/hooks";
 
 interface IChatDialog {
   chatId: string;
@@ -63,7 +64,9 @@ const ChatDialog: React.FC<IChatDialog> = ({
     getLastMessageOfDialog();
   }, [lastInDialog, messages, isDataLoaded]);
 
-  const getChatData = () => {};
+  const getChatData = () => {
+    
+  };
 
   return (
     <div className={styles.chatDialog__wrapper} onClick={() => getChatData()}>
