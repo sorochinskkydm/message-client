@@ -22,3 +22,18 @@ export interface IProject {
   employees: String[];
   dateCreated: Date;
 }
+
+export interface IMessage {
+  firstUserId: string;
+  secondUserId: string;
+  text: string;
+  chatId: string;
+}
+
+export interface IChat {
+  id: string;
+  firstUserId: string;
+  secondUserId: string;
+  chatId: string;
+  projectId: string;
+}

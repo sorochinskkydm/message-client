@@ -1,20 +1,39 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { IChat } from "../../interfaces/interface";
+import { instance } from "../../utils/api.config";
 
-const initialState = {
-  isChatActive: false,
-  chatId: "",
+interface IChatWrapper {
+  chatInfo: IChat[];
+  activeChatId: string;
+}
+
+export const getChatsData = createAsyncThunk("setChatData", async () => {
+  const storageUserId = localStorage.getItem("userId");
+  const response = await instance.get(
+    `http://localhost:8080/api/chats/${storageUserId}`
+  );
+  return response.data;
+});
+
+const initialState: IChatWrapper = {
+  chatInfo: [],
+  activeChatId: "",
 };
 
 const chatSlice = createSlice({
   name: "chats",
   initialState,
   reducers: {
-    setChatState(state, action: PayloadAction<any>) {
-      state.isChatActive = action.payload.isChatActive;
-      state.chatId = action.payload.chatId;
+    setActiveChatId(state, action) {
+      state.activeChatId = action.payload;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(getChatsData.fulfilled, (state, action) => {
+      state.chatInfo = action.payload;
+    });
   },
 });
 
-export const { setChatState } = chatSlice.actions;
+export const { setActiveChatId } = chatSlice.actions;
 export default chatSlice.reducer;

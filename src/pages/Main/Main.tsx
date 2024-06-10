@@ -11,7 +11,7 @@ const Main = () => {
       </div>
       <div className={styles.main__chats__wrapper}>
         <ChatHeader />
-        <Chat />
+        {/* <Chat /> */}
       </div>
     </div>
   );

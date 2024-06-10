@@ -91,7 +91,7 @@ const Auth: React.FC = () => {
             </button>
             <div className={styles.link__wrapper}>
               <Link className={styles.linkToRegister} to="/register">
-                Have no account? <br></br> Register
+                Нет аккаунта? <br></br> Зарегистрироваться
               </Link>
             </div>
           </div>

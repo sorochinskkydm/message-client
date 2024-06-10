@@ -12,6 +12,7 @@ import { instance } from "../../utils/api.config";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { setCaughtError, setErrorMessage } from "../../redux/slices/errorSlice";
 import { IProject, IUser } from "../../interfaces/interface";
+import { getChatsData } from "../../redux/slices/chatSlice";
 
 interface IChat {
   id: string;
@@ -28,25 +29,34 @@ interface IChats extends Array<IChat> {}
 const ChatPanel = (props: any) => {
   const dispatch = useAppDispatch();
   const userInfo = useAppSelector((state) => state.userReducer.userInfo);
+  const chatInfo = useAppSelector((state) => state.chatReducer.chatInfo);
+
   const [isOpen, setIsOpen] = React.useState(false);
   const [isModalOpen, setIsModalOpen] = React.useState(false);
-  const [chats, setChats] = React.useState<IChats>([]);
+  const [chats, setChats] = React.useState<any>([]);
 
   React.useEffect(() => {
-    const userId = localStorage.getItem("userId");
-    instance
-      .get(`http://localhost:8080/api/chats/${userId}`)
-      .then((response) => {
-        setChats(response.data);
-      })
-      .catch((error): void => {
-        dispatch(setErrorMessage(error.response.data.message));
-        dispatch(setCaughtError(true));
-        setTimeout(() => {
-          dispatch(setCaughtError(false));
-        }, 3000);
-      });
+    // const userId = localStorage.getItem("userId");
+    // instance
+    //   .get(`http://localhost:8080/api/chats/${userId}`)
+    //   .then((response) => {
+    //     setChats(response.data);
+    //     setChatData(response.data);
+    //     console.log(response.data);
+    //   })
+    //   .catch((error): void => {
+    //     dispatch(setErrorMessage(error.response.data.message));
+    //     dispatch(setCaughtError(true));
+    //     setTimeout(() => {
+    //       dispatch(setCaughtError(false));
+    //     }, 3000);
+    //   });
+    dispatch(getChatsData());
   }, [dispatch]);
+
+  React.useEffect(() => {
+    setChats(chatInfo);
+  }, [chatInfo]);
 
   return (
     <div className={styles.chatPanel__wrapper}>
@@ -92,7 +102,7 @@ const ChatPanel = (props: any) => {
             placeholder="Поиск диалогов"
           />
         </div>
-        {chats.map((chat: IChat, i) => {
+        {chats.map((chat: IChat, i: number) => {
           if (userInfo.id === chat.firstUserId) {
             return (
               <ChatDialog

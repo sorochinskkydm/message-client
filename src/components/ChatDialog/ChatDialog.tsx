@@ -3,7 +3,8 @@ import styles from "./ChatDialog.module.css";
 import userImage from "../../images/user.png";
 import { instance } from "../../utils/api.config";
 import { getHours, getMinutes } from "date-fns";
-import { useAppSelector } from "../../hooks/hooks";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
+import { setActiveChatId } from "../../redux/slices/chatSlice";
 
 interface IChatDialog {
   chatId: string;
@@ -35,6 +36,12 @@ const ChatDialog: React.FC<IChatDialog> = ({
   const [time, setTime] = React.useState("");
   const [isDataLoaded, setIsDataLoaded] = React.useState(false);
 
+  const activeChatId = useAppSelector(
+    (state) => state.chatReducer.activeChatId
+  );
+
+  const dispatch = useAppDispatch();
+
   React.useEffect(() => {
     instance
       .get(`http://localhost:8080/api/messages/${chatId}`)
@@ -64,12 +71,19 @@ const ChatDialog: React.FC<IChatDialog> = ({
     getLastMessageOfDialog();
   }, [lastInDialog, messages, isDataLoaded]);
 
-  const getChatData = () => {
-    
+  const setActiveChat = () => {
+    dispatch(setActiveChatId(chatId));
   };
 
   return (
-    <div className={styles.chatDialog__wrapper} onClick={() => getChatData()}>
+    <div
+      className={
+        activeChatId === chatId
+          ? styles.chatDialog__wrapper + " " + styles.active
+          : styles.chatDialog__wrapper
+      }
+      onClick={() => setActiveChat()}
+    >
       <div className={styles.image__wrapper}>
         <img
           src={userImage}
